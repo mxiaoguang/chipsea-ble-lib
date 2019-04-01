@@ -1,8 +1,8 @@
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
-def siteUrl = 'https://gitee.com/mmengchen/bledemo_v2'
-def gitUrl = 'https://gitee.com/mmengchen/bledemo_v2.git'
+def siteUrl = 'https://github.com/mmengchen/chipsea-ble-lib.git'
+def gitUrl = 'https://github.com/mmengchen/chipsea-ble-lib.git'
 
 group = 'com.chipsea'
 version = '1.0.0'
@@ -45,28 +45,32 @@ install {
         }
     }
 }
-//tasks.withType(JavaCompile) {
-//    options.encoding = "UTF-8"
-//}
-//
-//task androidJavadocs(type: Javadoc) {
-//    source = android.sourceSets.main.java.srcDirs
-//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-//}
-//
-//task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-//    classifier = 'javadoc'
-//    from androidJavadocs.destinationDir
-//}
+
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
 
 task androidSourcesJar(type: Jar) {
     classifier = 'sources'
     from android.sourceSets.main.java.srcDirs
 }
 
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+
 artifacts {
     archives androidSourcesJar
-//    archives androidJavadocsJar
+    archives androidJavadocsJar
 }
 
 Properties properties = new Properties()
