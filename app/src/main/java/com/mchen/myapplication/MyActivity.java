@@ -686,7 +686,7 @@ public class MyActivity extends BleProfileServiceReadyActivity implements Device
 
     @Override
     protected void onWeightData(boolean isHistory, CsFatScale csFatScale) {
-        setWeighDataText(csFatScale.getWeight() + "");
+        setWeighDataText(csFatScale.getWeight()/10.0f + "");
     }
 
     @Override

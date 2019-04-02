@@ -30,43 +30,43 @@ public class BodyFatData implements Serializable {
     /**
      * 身体质量指数
      */
-    private double bmi;
+    private float bmi;
     /**
      * 体脂率 body fat rate
      */
-    private double bfr;
+    private float bfr;
     /**
      * 皮下脂肪率 Subcutaneous fat rate
      */
-    private double sfr;
+    private float sfr;
     /**
      * 内脏脂肪指数
      */
-    private int uvi;
+    private float uvi;
     /**
      * 肌肉率 Rate of muscle
      */
-    private double rom;
+    private float rom;
     /**
      * 基础代谢率 basal metabolic rate
      */
-    private double bmr;
+    private float bmr;
     /**
      * 骨骼质量 Bone Mass
      */
-    private double bm;
+    private float bm;
     /**
      * 水含量
      */
-    private double vwc;
+    private float vwc;
     /**
      * 身体年龄 physical bodyAge
      */
-    private int bodyAge;
+    private float bodyAge;
     /**
      * 蛋白率 protein percentage
      */
-    private double pp;
+    private float pp;
 
     /**
      * 得分
@@ -98,7 +98,7 @@ public class BodyFatData implements Serializable {
     public BodyFatData() {
     }
 
-    public BodyFatData(String date, String time, float weight, double bmi, double bfr, double sfr, int uvi, double rom, double bmr, double bm, double vwc, int bodyAge,  double pp,float score, int number, int sex, int age, float height, float adc) {
+    public BodyFatData(String date, String time, float weight, float bmi, float bfr, float sfr, float uvi, float rom, float bmr, float bm, float vwc, float bodyAge, float pp, float score, int number, int sex, int age, float height, float adc) {
         this.date = date;
         this.time = time;
         this.weight = weight;
@@ -119,7 +119,6 @@ public class BodyFatData implements Serializable {
         this.height = height;
         this.adc = adc;
     }
-
 
     public String getDate() {
         return date == null ? "" : date;
@@ -145,83 +144,83 @@ public class BodyFatData implements Serializable {
         this.weight = weight;
     }
 
-    public double getBmi() {
+    public float getBmi() {
         return bmi;
     }
 
-    public void setBmi(double bmi) {
+    public void setBmi(float bmi) {
         this.bmi = bmi;
     }
 
-    public double getBfr() {
+    public float getBfr() {
         return bfr;
     }
 
-    public void setBfr(double bfr) {
+    public void setBfr(float bfr) {
         this.bfr = bfr;
     }
 
-    public double getSfr() {
+    public float getSfr() {
         return sfr;
     }
 
-    public void setSfr(double sfr) {
+    public void setSfr(float sfr) {
         this.sfr = sfr;
     }
 
-    public int getUvi() {
+    public float getUvi() {
         return uvi;
     }
 
-    public void setUvi(int uvi) {
+    public void setUvi(float uvi) {
         this.uvi = uvi;
     }
 
-    public double getRom() {
+    public float getRom() {
         return rom;
     }
 
-    public void setRom(double rom) {
+    public void setRom(float rom) {
         this.rom = rom;
     }
 
-    public double getBmr() {
+    public float getBmr() {
         return bmr;
     }
 
-    public void setBmr(double bmr) {
+    public void setBmr(float bmr) {
         this.bmr = bmr;
     }
 
-    public double getBm() {
+    public float getBm() {
         return bm;
     }
 
-    public void setBm(double bm) {
+    public void setBm(float bm) {
         this.bm = bm;
     }
 
-    public double getVwc() {
+    public float getVwc() {
         return vwc;
     }
 
-    public void setVwc(double vwc) {
+    public void setVwc(float vwc) {
         this.vwc = vwc;
     }
 
-    public int getBodyAge() {
+    public float getBodyAge() {
         return bodyAge;
     }
 
-    public void setBodyAge(int bodyAge) {
+    public void setBodyAge(float bodyAge) {
         this.bodyAge = bodyAge;
     }
 
-    public double getPp() {
+    public float getPp() {
         return pp;
     }
 
-    public void setPp(double pp) {
+    public void setPp(float pp) {
         this.pp = pp;
     }
 

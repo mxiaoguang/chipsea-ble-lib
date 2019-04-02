@@ -12,6 +12,7 @@ import com.chipsea.entity.User;
 import com.chipsea.healthscale.CsAlgoBuilderEx;
 import com.chipsea.scandecoder.ScanRecord;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class BleConfig {
     //指令
     public final static byte SYNC_UNIT = (byte) 0x01;
 
+    private static DecimalFormat decimalFormat = new DecimalFormat("0.0");
 
     /**
      * 解析广播信息获取广播内容
@@ -300,7 +302,6 @@ public class BleConfig {
              * @param r 当前测量电阻
              *
              */
-//            csAlgoBuilderEx.setUserInfo(155.0f, (byte) 0, 29, 65.6f, 475.55f);
 
             csAlgoBuilderEx.setUserInfo(user.getHeight(), user.getSex(), user.getAge(), (csFatScale.getWeight() / 10f), (csFatScale.getAdc() / 10f));
 
@@ -339,14 +340,61 @@ public class BleConfig {
             sb.append("评分:" + csAlgoBuilderEx.getScore() + "\r\n");
 
 
-            L.i(TAG, ">>>>>>>>>>BodyFatData>>>>>>>>>>" + sb.toString());
+            L.i(TAG, ">>>>>>>>>>FatData>>>>>>>>>>" + sb.toString());
 
+            //体重
+            float weight = floatFormat((csFatScale.getWeight() / 10.0f));
+
+            //bmi
+            float bmi = floatFormat(((csFatScale.getWeight() / 10.0f) / ((user.getHeight() / 100.0f) * (user.getHeight()) / 100.0f)));
+
+            //体脂率
+            float bfr = floatFormat(csAlgoBuilderEx.getBFR());
+
+            //肌肉率
+            float rom = floatFormat((csAlgoBuilderEx.getSLM() / 100.0f));
+
+            //水含量(水分)
+            float vwc = floatFormat(csAlgoBuilderEx.getTFR());
+
+            //骨量
+            float bm = floatFormat(csAlgoBuilderEx.getMSW());
+
+            //皮下脂肪
+            float sfr = floatFormat(csAlgoBuilderEx.getFM());
+
+            //基础代谢率
+            float bmr = floatFormat(csAlgoBuilderEx.getBMR());
+
+            //蛋白率
+            float pp = floatFormat((csAlgoBuilderEx.getPM() / csFatScale.getWeight() * 100f));
+
+            //内脏脂肪
+            float vui = floatFormat(csAlgoBuilderEx.getVFR());
+
+            //身体年龄
+            float bodyAge = floatFormat(csAlgoBuilderEx.getBodyAge());
+
+            //分数
+            float score = floatFormat(csAlgoBuilderEx.getScore());
 
             bodyFatData = new BodyFatData(DateUtil.getYmd(csFatScale.getDate()), DateUtil.getTime(csFatScale.getDate()),
-                    csFatScale.getWeight() / 10f, (csFatScale.getWeight() / 10f) / ((user.getHeight() / 100f) * (user.getHeight()) / 100f), csAlgoBuilderEx.getBFR(), csAlgoBuilderEx.getBFR(), (int) csAlgoBuilderEx.getVFR(), 0, csAlgoBuilderEx.getBMR(), csAlgoBuilderEx.getMSW(), csAlgoBuilderEx.getTF(), (int) csAlgoBuilderEx.getBodyAge(), csAlgoBuilderEx.getPM(), csAlgoBuilderEx.getScore(), user.getId(), user.getSex()
-                    , user.getAge(), user.getHeight(), (csFatScale.getAdc() / 10f));
+                    weight, bmi, bfr, sfr, vui, rom, bmr, bm, vwc, bodyAge, pp, score, user.getId(), user.getSex(), user.getAge(), user.getHeight(), user.getAdc());
         }
 
         return bodyFatData;
+    }
+
+    /**
+     * 获取一位数float
+     *
+     * @param value
+     * @return
+     */
+    private static float floatFormat(float value) {
+        float data;
+        String dataStr = decimalFormat.format(value);
+        data = Float.parseFloat(dataStr);
+        return data;
     }
 }
